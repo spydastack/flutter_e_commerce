@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "505976113972",
+    "project_id": "ecommerce-d178d",
+    "storage_bucket": "ecommerce-d178d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505976113972:android:1577c785f2d825b299b361",
+        "android_client_info": {
+          "package_name": "com.spydastack.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505976113972-8q1uhbbnsmtroh7doa6av4rk3ndkibqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB52YuBiKVfTKxH6qkURZAPXYdfzGJu68c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505976113972-8q1uhbbnsmtroh7doa6av4rk3ndkibqa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "505976113972-doo70k9tg0b0qe55fjt0nda8ptl3bnol.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.spydastack.ecommerce"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
