@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/models/clothes.dart';
+import 'package:ecommerce_app/models/product.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -6,7 +6,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Clothes;
+    final args = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       body: Column(
         children: [

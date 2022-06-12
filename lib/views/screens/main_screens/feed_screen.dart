@@ -1,10 +1,17 @@
 import 'package:ecommerce_app/widgets/feeds_product.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/clothes.dart';
+import '../../../models/product.dart';
 
-class FeedScreen extends StatelessWidget {
+class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FeedScreen> createState() => _FeedScreenState();
+}
+
+class _FeedScreenState extends State<FeedScreen> {
+  final List<Product> product = Product.generateClothes();
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +39,16 @@ class FeedScreen extends StatelessWidget {
         mainAxisSpacing: 5,
         crossAxisCount: 2,
         children: List.generate(
-          10,
+          product.length,
           (index) => FeedsProduct(
-            clothe: Clothes(
-              id: "1",
-              name: "T-Shirt",
-              category: "T-Shirt",
-              price: "30",
-              imageUrl:
-                  "https://cdn.pixabay.com/photo/2017/05/23/10/53/t-shirt-design-2336850_960_720.jpg",
+            product: Product(
+              id: product[index].id,
+              name: product[index].name,
+              price: product[index].price,
+              imageUrl: product[index].imageUrl,
+              quantity: product[index].quantity,
+              description: product[index].description,
+              category: product[index].category,
             ),
           ),
         ),

@@ -1,5 +1,3 @@
-import '../models/clothes.dart';
-
 List<dynamic> dummyClothesData = [
   {
     'id': '1',
@@ -7,10 +5,9 @@ List<dynamic> dummyClothesData = [
     'description': 'A very nice T-shirt',
     'imageUrl':
         'https://cdn.pixabay.com/photo/2017/05/23/10/53/t-shirt-design-2336850_960_720.jpg',
-    'price': '\$20',
+    'price': 20,
     'category': 'T-shirt',
-    'color': 'Navy blue',
-    'size': 'M',
+    'quantity': 5,
   },
   {
     'id': '2',
@@ -18,10 +15,9 @@ List<dynamic> dummyClothesData = [
     'description': 'Look stunning at beach',
     'imageUrl':
         'https://cdn.pixabay.com/photo/2020/10/20/11/03/woman-5670164_960_720.jpg',
-    'price': '\$36',
+    'price': 36.99,
     'category': 'Dress',
-    'color': 'White',
-    'size': 'M',
+    'quantity': 4,
   },
   {
     'id': '3',
@@ -29,10 +25,9 @@ List<dynamic> dummyClothesData = [
     'description': 'White and red Nike Air-force ones',
     'imageUrl':
         'https://cdn.pixabay.com/photo/2021/07/22/11/01/nike-6485030_960_720.jpg',
-    'price': '\$200',
+    'price': 200,
     'category': 'Shoes',
-    'color': 'White',
-    'size': 'M',
+    'quantity': 9,
   },
   {
     'id': '4',
@@ -40,28 +35,26 @@ List<dynamic> dummyClothesData = [
     'description': 'A very nice shirt',
     'imageUrl':
         'https://cdn.pixabay.com/photo/2017/03/20/15/13/wrist-watch-2159351_960_720.jpg',
-    'price': '\$450',
+    'price': 450,
     'category': 'Watch',
-    'color': 'Brown',
-    'size': 'M',
+    'quantity': 2,
   },
   {
     'id': '5',
     'name': 'T-shirt',
     'description': 'A very nice T-shirt',
     'imageUrl': 'https://i.ibb.co/1X2ztqp/tshirt.jpg',
-    'price': '\$20',
+    'price': 20,
     'category': 'T-shirt',
-    'color': 'Red',
-    'size': 'M',
+    'quantity': 30,
   },
   {
     'id': '6',
     'name': 'T-shirt',
     'description': 'A very nice T-shirt',
     'imageUrl': 'https://i.ibb.co/1X2ztqp/tshirt.jpg',
-    'price': '\$20',
+    'price': 20,
     'category': 'T-shirt',
-    'color': 'Red',
+    'quantity': 7,
   }
 ];

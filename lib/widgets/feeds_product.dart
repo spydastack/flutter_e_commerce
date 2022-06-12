@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-import '../models/clothes.dart';
+import '../models/product.dart';
 
 class FeedsProduct extends StatefulWidget {
-  final Clothes clothe;
+  final Product product;
   const FeedsProduct({
     Key? key,
-    required this.clothe,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                     ),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(widget.clothe.imageUrl),
+                      image: NetworkImage(widget.product.imageUrl),
                     ),
                   ),
                 ),
@@ -63,7 +63,7 @@ class _FeedsProductState extends State<FeedsProduct> {
             Column(
               children: [
                 Text(
-                  widget.clothe.name,
+                  widget.product.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -71,7 +71,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                   ),
                 ),
                 Text(
-                  widget.clothe.price,
+                  "\$${widget.product.price}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,

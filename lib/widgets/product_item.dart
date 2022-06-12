@@ -4,13 +4,13 @@ import 'package:badges/badges.dart';
 import 'package:ecommerce_app/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_app/models/clothes.dart';
+import '../models/product.dart';
 
 class ProductItem extends StatelessWidget {
-  final Clothes clothe;
+  final Product product;
   const ProductItem({
     Key? key,
-    required this.clothe,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class ProductItem extends StatelessWidget {
         Navigator.pushNamed(
           context,
           details,
-          arguments: clothe,
+          arguments: product,
         );
       },
       child: Card(
@@ -43,7 +43,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(clothe.imageUrl),
+                      image: NetworkImage(product.imageUrl),
                     ),
                   ),
                 ),
@@ -68,7 +68,7 @@ class ProductItem extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  clothe.name,
+                  product.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -76,7 +76,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  clothe.price,
+                  product.price.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
