@@ -1,12 +1,18 @@
 import 'package:ecommerce_app/models/product.dart';
+import 'package:ecommerce_app/provider/cart.dart';
+import 'package:ecommerce_app/provider/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Product;
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productProvider = Provider.of<ProductsProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    Product product = productProvider.findById(productId);
     return Scaffold(
       body: Column(
         children: [
@@ -17,7 +23,7 @@ class DetailScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(args.imageUrl),
+                    image: NetworkImage(product.imageUrl),
                   ),
                 ),
               ),
@@ -46,7 +52,7 @@ class DetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  args.name,
+                  product.name,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -59,6 +65,61 @@ class DetailScreen extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.favorite_border),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              product.description,
+              style: const TextStyle(
+                fontSize: 15,
+                height: 1.7,
+              ),
+            ),
+          ),
+          const Expanded(
+            child: SizedBox(),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'price',
+                      ),
+                      Text(
+                        '\$${product.price}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      cartProvider.addItem(
+                        product.id,
+                        product.name,
+                        product.price,
+                        product.imageUrl,
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                    ),
+                    child: const Text('Add to Cart'),
+                  ),
                 ),
               ],
             ),

@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product.dart';
 
 class FeedsProduct extends StatefulWidget {
-  final Product product;
   const FeedsProduct({
     Key? key,
-    required this.product,
   }) : super(key: key);
 
   @override
@@ -17,8 +17,15 @@ class FeedsProduct extends StatefulWidget {
 class _FeedsProductState extends State<FeedsProduct> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Card(
+    final Product product = Provider.of<Product>(context);
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          details,
+          arguments: product.id,
+        );
+      },
+      child: Card(
         elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -37,7 +44,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                     ),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(widget.product.imageUrl),
+                      image: NetworkImage(product.imageUrl),
                     ),
                   ),
                 ),
@@ -63,7 +70,7 @@ class _FeedsProductState extends State<FeedsProduct> {
             Column(
               children: [
                 Text(
-                  widget.product.name,
+                  product.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -71,7 +78,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                   ),
                 ),
                 Text(
-                  "\$${widget.product.price}",
+                  "\$${product.price}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,

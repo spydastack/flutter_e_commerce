@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/provider/products.dart';
 import 'package:ecommerce_app/widgets/feeds_product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/product.dart';
 
@@ -11,10 +13,11 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  final List<Product> product = Product.generateClothes();
-
   @override
   Widget build(BuildContext context) {
+    final productsProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
+    List<Product> productsList = productsProvider.products;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,17 +42,10 @@ class _FeedScreenState extends State<FeedScreen> {
         mainAxisSpacing: 5,
         crossAxisCount: 2,
         children: List.generate(
-          product.length,
-          (index) => FeedsProduct(
-            product: Product(
-              id: product[index].id,
-              name: product[index].name,
-              price: product[index].price,
-              imageUrl: product[index].imageUrl,
-              quantity: product[index].quantity,
-              description: product[index].description,
-              category: product[index].category,
-            ),
+          productsList.length,
+          (index) => ChangeNotifierProvider.value(
+            value: productsList[index],
+            child: const FeedsProduct(),
           ),
         ),
       ),

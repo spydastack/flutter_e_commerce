@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import '../dummy_data/dummy_data.dart';
 
-class Product {
+class Product with ChangeNotifier {
   final String id;
   final String name;
   final String description;
@@ -30,8 +32,8 @@ class Product {
     );
   }
 
-  static List<Product> generateClothes() {
-    return dummyClothesData
+  static List<Product> generateProducts() {
+    return dummyProductData
         .map(
           (e) => Product.fromJson(e),
         )

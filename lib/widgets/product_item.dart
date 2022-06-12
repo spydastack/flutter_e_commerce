@@ -20,7 +20,7 @@ class ProductItem extends StatelessWidget {
         Navigator.pushNamed(
           context,
           details,
-          arguments: product,
+          arguments: product.id,
         );
       },
       child: Card(
@@ -76,7 +76,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  product.price.toString(),
+                  '\$${product.price.toString()}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
