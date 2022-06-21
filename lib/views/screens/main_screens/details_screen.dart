@@ -107,18 +107,22 @@ class DetailScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      cartProvider.addItem(
-                        product.id,
-                        product.name,
-                        product.price,
-                        product.imageUrl,
-                      );
-                    },
+                    onPressed: cartProvider.isInCart(product.id)
+                        ? null
+                        : () {
+                            cartProvider.addItem(
+                              product.id,
+                              product.name,
+                              product.price,
+                              product.imageUrl,
+                            );
+                          },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black,
                     ),
-                    child: const Text('Add to Cart'),
+                    child: cartProvider.isInCart(product.id)
+                        ? const Text('In cart')
+                        : const Text('Add to Cart'),
                   ),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/routes.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -9,7 +10,7 @@ class CategoryItem extends StatelessWidget {
 
   final List<Map<String, Object>> categories = const [
     {
-      'name': 'T-Shirts',
+      'name': 'Watch',
       'imageUrl':
           'assets/images/charming-curly-woman-white-blouse-smiles-sincerely-looks-front-poses-cozy-dressing-room.jpg',
     },
@@ -35,32 +36,38 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          width: 150,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('${categories[index]['imageUrl']}'),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(categoryFeed, arguments: categories[index]['name']);
+      },
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            width: 150,
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('${categories[index]['imageUrl']}'),
+              ),
             ),
           ),
-        ),
-        Positioned(
-          bottom: 10,
-          left: 20,
-          child: Text(
-            '${categories[index]['name']}',
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+          Positioned(
+            bottom: 10,
+            left: 20,
+            child: Text(
+              '${categories[index]['name']}',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

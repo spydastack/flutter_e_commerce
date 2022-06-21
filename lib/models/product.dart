@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import '../dummy_data/dummy_data.dart';
-
 class Product with ChangeNotifier {
   final String id;
   final String name;
@@ -32,11 +30,15 @@ class Product with ChangeNotifier {
     );
   }
 
-  static List<Product> generateProducts() {
-    return dummyProductData
-        .map(
-          (e) => Product.fromJson(e),
-        )
-        .toList();
+  factory Product.fromFirebase(snapshot) {
+    return Product(
+      id: snapshot.id as String,
+      name: snapshot['name'] as String,
+      description: snapshot['description'] as String,
+      imageUrl: snapshot['imageUrl'] as String,
+      price: snapshot['price'].toDouble(),
+      category: snapshot['category'] as String,
+      quantity: snapshot['quantity'] as int,
+    );
   }
 }

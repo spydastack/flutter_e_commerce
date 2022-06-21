@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/provider/products.dart';
 import 'package:ecommerce_app/views/screens/main_screens/cart_screen.dart';
 import 'package:ecommerce_app/views/screens/main_screens/feed_screen.dart';
 import 'package:ecommerce_app/views/screens/main_screens/home_screen.dart';
@@ -5,6 +6,7 @@ import 'package:ecommerce_app/views/screens/main_screens/profile_screen.dart';
 import 'package:ecommerce_app/views/screens/main_screens/search_screen.dart';
 import 'package:ecommerce_app/views/screens/main_screens/upload_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/custom_appbar.dart';
 
@@ -34,11 +36,37 @@ class _ButtonNavBarState extends State<MainNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final _productsProvider =
+        Provider.of<ProductsProvider>(context, listen: true);
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        child: _productsProvider.products.isEmpty
+            ? FutureBuilder(
+                future: _productsProvider.fetchProducts(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return const Center(
+                          child: Text('Fetching products'),
+                        );
+                      case ConnectionState.active:
+                      case ConnectionState.done:
+                        return Center(
+                          child: _widgetOptions.elementAt(_selectedIndex),
+                        );
+                    }
+                  }
+                },
+              )
+            : Center(
+                child: _widgetOptions.elementAt(_selectedIndex),
+              ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

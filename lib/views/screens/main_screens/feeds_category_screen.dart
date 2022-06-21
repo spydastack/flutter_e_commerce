@@ -5,25 +5,25 @@ import 'package:provider/provider.dart';
 
 import '../../../models/product.dart';
 
-class FeedScreen extends StatefulWidget {
-  const FeedScreen({Key? key}) : super(key: key);
+class CategoryFeedScreen extends StatefulWidget {
+  const CategoryFeedScreen({Key? key}) : super(key: key);
 
   @override
-  State<FeedScreen> createState() => _FeedScreenState();
+  State<CategoryFeedScreen> createState() => _CategoryFeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _CategoryFeedScreenState extends State<CategoryFeedScreen> {
   @override
   Widget build(BuildContext context) {
+    final category = ModalRoute.of(context)!.settings.arguments as String;
     final productsProvider =
-        Provider.of<ProductsProvider>(context, listen: true);
-    List<Product> productsList = productsProvider.products;
+        Provider.of<ProductsProvider>(context, listen: false);
+    List<Product> productsList = productsProvider.findByCategory(category);
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          'Feeds products',
-          style: TextStyle(
+        title: Text(
+          '$category category',
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),

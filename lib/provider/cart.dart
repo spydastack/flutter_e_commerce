@@ -12,6 +12,10 @@ class CartProvider with ChangeNotifier {
     return _cartItems.length;
   }
 
+  bool isInCart(String productId) {
+    return _cartItems.containsKey(productId);
+  }
+
   double get cartTotal {
     double total = 0.0;
     _cartItems.forEach((key, cartItem) {
@@ -27,15 +31,30 @@ class CartProvider with ChangeNotifier {
     String imageUrl,
   ) {
     if (_cartItems.containsKey(productId)) {
-      _cartItems[productId]!.quantity + 1;
+      _cartItems[productId]!.quantity += 1;
     } else {
       _cartItems[productId] = CartItem(
+        id: DateTime.now().toString(),
         productId: productId,
         name: name,
         price: price,
         quantity: 1,
         imageUrl: imageUrl,
       );
+    }
+    notifyListeners();
+  }
+
+  void deleteFromCart(String productId) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  void reduceCartItem(String productId) {
+    if (_cartItems[productId]!.quantity > 1) {
+      _cartItems[productId]!.quantity -= 1;
+    } else {
+      _cartItems.remove(productId);
     }
     notifyListeners();
   }
