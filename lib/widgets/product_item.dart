@@ -3,24 +3,24 @@ import 'dart:ui';
 import 'package:badges/badges.dart';
 import 'package:ecommerce_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product;
   const ProductItem({
     Key? key,
-    required this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _product = Provider.of<Product>(context, listen: false);
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           details,
-          arguments: product.id,
+          arguments: _product.id,
         );
       },
       child: Card(
@@ -43,7 +43,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(product.imageUrl),
+                      image: NetworkImage(_product.imageUrl),
                     ),
                   ),
                 ),
@@ -68,7 +68,7 @@ class ProductItem extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  product.name,
+                  _product.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -76,7 +76,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$${product.price.toString()}',
+                  '\$${_product.price.toString()}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,

@@ -2,12 +2,13 @@ import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/provider/cart.dart';
 import 'package:ecommerce_app/provider/products.dart';
 import 'package:ecommerce_app/routes.dart';
+import 'package:ecommerce_app/views/screens/app_screens/order_screen.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
 import 'package:ecommerce_app/views/screens/auth/register_screen.dart';
 import 'package:ecommerce_app/views/screens/main_nav_bar.dart';
-import 'package:ecommerce_app/views/screens/main_screens/details_screen.dart';
-import 'package:ecommerce_app/views/screens/main_screens/feeds_category_screen.dart';
-import 'package:ecommerce_app/views/screens/main_screens/reset_password_screen.dart';
+import 'package:ecommerce_app/views/screens/navbar_screens/details_screen.dart';
+import 'package:ecommerce_app/views/screens/navbar_screens/feeds_category_screen.dart';
+import 'package:ecommerce_app/views/screens/auth/reset_password_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
         mainNavbar: (context) => const MainNavBar(),
         details: (context) => const DetailScreen(),
         categoryFeed: (context) => const CategoryFeedScreen(),
+        orderScreen: (context) => const OrderScreen(),
       },
     );
   }

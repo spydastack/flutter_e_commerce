@@ -4,3 +4,4 @@ const mainNavbar = "/mainNavbar";
 const resetPassword = "/resetPassword";
 const details = "/details";
 const categoryFeed = "/categoryFeed";
+const orderScreen = "/orderScreen";

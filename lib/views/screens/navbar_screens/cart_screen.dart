@@ -1,17 +1,49 @@
+import 'package:ecommerce_app/controllers/product_controller.dart';
 import 'package:ecommerce_app/models/cart_item.dart';
 import 'package:ecommerce_app/provider/cart.dart';
+import 'package:ecommerce_app/routes.dart';
 import 'package:ecommerce_app/widgets/cart_empty.dart';
 import 'package:ecommerce_app/widgets/single_cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  final ProductController _productController = ProductController();
+  final CartProvider _cartProvider = CartProvider();
+
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _isLoading = false;
+    super.initState();
+  }
+
+  Future<void> placeOrder(
+    List<CartItem> cartItems,
+  ) async {
+    setState(() {
+      _isLoading = true;
+    });
+    await _productController.placeUserOrder(cartItems);
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final List<CartItem> cartItems = cartProvider.cartItems.values.toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -59,13 +91,21 @@ class CartScreen extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Checkout"),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
-                      ),
-                    ),
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () async {
+                              await placeOrder(cartItems);
+                              cartProvider.clearCart();
+                              Navigator.of(context).pushNamed(
+                                orderScreen,
+                              );
+                            },
+                            child: const Text("Checkout"),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
+                          ),
                   )
                 ],
               ),

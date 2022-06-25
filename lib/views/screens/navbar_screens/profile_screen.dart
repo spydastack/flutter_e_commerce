@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/controllers/auth_controller.dart';
 import 'package:ecommerce_app/controllers/user_controller.dart';
+import 'package:ecommerce_app/routes.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -73,6 +74,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ElevatedButton(
               onPressed: () async => await _authController.signOut(),
               child: const Text("Logout"),
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: () => Navigator.of(context).pushNamed(orderScreen),
+              child: const Text("Orders"),
             ),
           ),
         ],

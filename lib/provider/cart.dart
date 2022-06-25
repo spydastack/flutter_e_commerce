@@ -50,6 +50,11 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearCart() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
   void reduceCartItem(String productId) {
     if (_cartItems[productId]!.quantity > 1) {
       _cartItems[productId]!.quantity -= 1;
